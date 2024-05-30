@@ -1,7 +1,7 @@
 using EntityFrameworkApi.DTO;
 using EntityFrameworkApi.Interfaces;
 using EntityFrameworkApi.Models;
-using EntityFrameworkApi.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace EntityFrameworkApi.Services;
 
@@ -51,8 +51,16 @@ public class PrescriptionService : IPrescriptionService
                 Details = med.Description
             });
         }
-
-        await _prescriptionRepository.AddPrescriptionAsync(prescription);
+        
+        try
+        {
+            await _prescriptionRepository.AddPrescriptionAsync(prescription);
+        }
+        catch (DbUpdateConcurrencyException e)
+        {
+            Console.WriteLine(e);
+            return false;
+        }
         return true;
     }
 

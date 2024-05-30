@@ -24,5 +24,9 @@ public class Prescription
     [ForeignKey("IdDoctor")]
     public Doctor Doctor { get; set; }
 
-    public List<PrescriptionMedicament> PrescriptionMedicaments { get; set; } = new List<PrescriptionMedicament>();
+    public List<PrescriptionMedicament> PrescriptionMedicaments { get; set; } = new 
+        List<PrescriptionMedicament>();
+    
+    [Timestamp]
+    public byte[] RowVersion { get; set; }
 }

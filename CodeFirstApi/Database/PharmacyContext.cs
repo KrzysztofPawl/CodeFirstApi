@@ -15,6 +15,12 @@ public class PharmacyContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        
+        //Blokowanie optymistyczne
+        modelBuilder.Entity<Prescription>()
+            .Property(p => p.RowVersion)
+            .IsRowVersion();
+        
         //Klucz złożony
         modelBuilder.Entity<PrescriptionMedicament>()
             .HasKey(pm => new { pm.IdMedicament, pm.IdPrescription });
