@@ -106,14 +106,4 @@ public class PrescriptionService : IPrescriptionService
 
         return patientDetails;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
